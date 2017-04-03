@@ -23,7 +23,11 @@ describe('omdb service', function() {
     "Response": "True"
   };
   it('should behave...Search movie data', function() {
-    var service = {};
+    var service = {
+      search: function(query) {
+        return movieData;
+      }
+    };
     expect(service.search('star wars')).toBe(movieData);
   });
 });
