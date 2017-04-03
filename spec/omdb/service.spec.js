@@ -100,19 +100,14 @@ describe('omdb service', function() {
     "Website": "http://www.starwars.com/episode-iv/",
     "Response": "True"
   };
+  beforeEach(module('omdb'));
+  beforeEach(inject(function(_omdbApi_) {
+    omdbApi = _omdbApi_;
+  }));
   it('should return movie data', function() {
-    module('omdb');
-    inject(function(_omdbApi_) {
-      omdbApi = _omdbApi_;
-    });
     expect(omdbApi.search('star wars')).toEqual(movieData);
   });
   it('should return movie data by id', function() {
-    var omdbApi = {};
-    module('omdb');
-    inject(function(_omdbApi_) {
-      omdbApi = _omdbApi_;
-    });
     expect(omdbApi.find('tt0076759')).toEqual(movieDataById);
   })
 });
