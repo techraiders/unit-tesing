@@ -32,7 +32,11 @@ describe('omdb service', function() {
         }
       }
     });
-    // service = ???
+
+    angular.mock.inject(function(omdbApi) {
+      service = omdbApi;
+    });
+
     expect(service.search('star wars')).toBe(movieData);
     //testcase fails because service is undefined, we didn't get an instance of omdbApi service to service variable.
   });
