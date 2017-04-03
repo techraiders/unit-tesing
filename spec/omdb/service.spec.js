@@ -107,8 +107,12 @@ describe('omdb service', function() {
   }));
 
   it('should return movie data', function() {
-    dump(angular.mock.dump(movieData));
-    expect(omdbApi.search('star wars')).toEqual(movieData);
+    var response;
+    omdbApi.search('star wars')
+      .then(function(data) {
+        response = data;
+      });
+    expect(response).toEqual(movieData);
   });
 
   it('should return movie data by id', function() {
