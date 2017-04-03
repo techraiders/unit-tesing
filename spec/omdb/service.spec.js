@@ -100,19 +100,25 @@ describe('omdb service', function() {
     "Website": "http://www.starwars.com/episode-iv/",
     "Response": "True"
   };
+  var omdbApi = {};
+  var $httpBackend;
 
   beforeEach(module('omdb'));
-  beforeEach(inject(function(_omdbApi_) {
+  beforeEach(inject(function(_omdbApi_, _$httpBackend_) {
     omdbApi = _omdbApi_;
+    $httpBackend = _$httpBackend_;
   }));
 
   it('should return movie data', function() {
-    var response;
+    var response, data;
+    $httpBackend.when('GET', 'http://www.omdbapi.com/?v=1&s=star%20wars')
+      .respond(200, movieData);
     omdbApi.search('star wars')
-      .then(function(data) {
-        response = data;
+      .then(function(response) {
+        data = response.data;
       });
-    expect(response).toEqual(movieData);
+    $httpBackend.flush();
+    expect(data).toEqual(movieData);
   });
 
   it('should return movie data by id', function() {
