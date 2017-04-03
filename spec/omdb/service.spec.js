@@ -24,13 +24,22 @@ describe('omdb service', function() {
   };
   it('should return movie data', function() {
     var omdbApi = {};
-    // Passes object literal to ng-mock module method, to create angular anonymous module.
-    angular.mock.module({
+
+    /*angular.mock.module({
       'omdbApi': {
         search: function(query) {
           return movieData;
         }
       }
+    });*/
+    angular.mock.module(function($provide) {
+      $provide.factory('omdbApi', function() {
+        return {
+          search: function(query) {
+            return movieData;
+          }
+        }
+      });
     });
 
     angular.mock.inject(function(_omdbApi_) {
