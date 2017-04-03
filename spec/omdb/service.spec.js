@@ -22,12 +22,18 @@ describe('omdb service', function() {
     "totalResults": "3",
     "Response": "True"
   };
-  it('should behave...Search movie data', function() {
-    var service = {
-      search: function(query) {
-        return movieData;
+  it('should return movie data', function() {
+    var service = {};
+    // Passes object literal to ng-mock module method, to create angular anonymous module.
+    angular.mock.module({
+      'omdbApi': {
+        search: function(query) {
+          return movieData;
+        }
       }
-    };
+    });
+    // service = ???
     expect(service.search('star wars')).toBe(movieData);
+    //testcase fails because service is undefined, we didn't get an instance of omdbApi service to service variable.
   });
 });
