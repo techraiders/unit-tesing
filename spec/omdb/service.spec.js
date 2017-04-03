@@ -23,7 +23,7 @@ describe('omdb service', function() {
     "Response": "True"
   };
   it('should return movie data', function() {
-    var service = {};
+    var omdbApi = {};
     // Passes object literal to ng-mock module method, to create angular anonymous module.
     angular.mock.module({
       'omdbApi': {
@@ -33,11 +33,10 @@ describe('omdb service', function() {
       }
     });
 
-    angular.mock.inject(function(omdbApi) {
-      service = omdbApi;
+    angular.mock.inject(function(_omdbApi_) {
+      omdbApi = _omdbApi_;
     });
 
-    expect(service.search('star wars')).toBe(movieData);
-    //testcase fails because service is undefined, we didn't get an instance of omdbApi service to service variable.
+    expect(omdbApi.search('star wars')).toBe(movieData);
   });
 });
