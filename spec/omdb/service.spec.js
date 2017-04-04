@@ -128,6 +128,14 @@ describe('omdb service', function() {
   });
 
   it('should return movie data by id', function() {
-    expect(omdbApi.find('tt0076759')).toEqual(movieDataById);
+    var response, data;
+
+    $httpBackend.expect('GET', 'http://www.omdbapi.com/?v=1&i=tt0076759').respond(200, movieDataById);
+
+    omdbApi.find('tt0076759').then(function(response) {
+      data = response.data;
+    });
+    $httpBackend.flush();
+    expect(data).toEqual(movieDataById);
   });
 });
