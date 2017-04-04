@@ -2,19 +2,12 @@ describe('Search controller', function() {
   var $scope;
   var $location;
 
+  beforeEach(module('movieApp'));
   beforeEach(inject(function(_$controller_, _$location_) {
     $scope = {};
     $location = _$location_;
 
-    var fn = function($scope) {
-      $scope.search = function() {
-        if ($scope.query) {
-          $location.path('/results').search('q', $scope.query);
-        }
-      };
-    };
-
-    _$controller_(fn, {
+    _$controller_('seachController', {
       $scope: $scope,
       $location: $location
     });
