@@ -9,6 +9,8 @@
         var deffred = $q.defer();
         $http.get(url).then(function(response) {
           deffred.resolve(response);
+        }, function() {
+          deffred.reject();
         });
         return deffred.promise;
       }
