@@ -111,8 +111,14 @@ describe('omdb service', function() {
 
   it('should return movie data', function() {
     var response, data;
-    $httpBackend.when('GET', 'http://www.omdbapi.com/?v=1&s=star%20wars')
+    //var expectedUrl = 'http://www.omdbapi.com/?v=1&s=star%20wars';
+    var expectedUrl = function(url) {
+      return url.indexOf('http://www.omdbapi.com/?v=1&s=star%20wars') !== -1;
+    };
+
+    $httpBackend.when('GET', expectedUrl)
       .respond(200, movieData);
+
     omdbApi.search('star wars')
       .then(function(response) {
         data = response.data;
