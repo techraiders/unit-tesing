@@ -4,19 +4,20 @@
     .factory('omdbApi', function($http, $q) {
       var service = {};
       var baseUrl = 'http://www.omdbapi.com/?v=1&';
-      service.search = function(query) {
-        var deferred = $q.defer();
-        $http.get(baseUrl + 's=' + encodeURIComponent(query)).then(function(response) {
-          deferred.resolve(response);
+
+      function httpPromise(url) {
+        var deffred = $q.defer();
+        $http.get(url).then(function(response) {
+          deffred.resolve(response);
         });
-        return deferred.promise;
+        return deffred.promise;
+      }
+
+      service.search = function(query) {
+        return httpPromise(baseUrl + 's=' + encodeURIComponent(query));
       };
       service.find = function(id) {
-        var deferred = $q.defer();
-        $http.get(baseUrl + 'i=' + id).then(function(response) {
-          deferred.resolve(response);
-        });
-        return deferred.promise;
+        return httpPromise(baseUrl + 'i=' + id);
       };
       return service;
     });
