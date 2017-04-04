@@ -1,10 +1,10 @@
 (function() {
   'use strict';
   angular.module('movieApp', [])
-    .controller('seachController', function($scope, $location) {
-      $scope.search = function() {
-        if ($scope.query) {
-          $location.path('/results').search('q', $scope.query);
+    .controller('seachController', function($location) {
+      this.search = function() {
+        if (this.query) {
+          $location.path('/results').search('q', this.query);
         }
       };
     });
