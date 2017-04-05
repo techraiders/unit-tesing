@@ -74,5 +74,10 @@ describe('Users factory', function() {
     it('should return one user object if it exists', function() {
       expect(Users.findById('2')).toEqual(singleUser);
     });
+
+    // A test to verify that calling findById() with an id that doesn't exist, in this case 'ABC', returns undefined
+    it('should return undefined if the user cannot be found', function() {
+      expect(Users.findById('ABC')).not.toBeDefined();
+    });
   });
 });
