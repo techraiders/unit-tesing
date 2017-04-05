@@ -6,7 +6,10 @@
     .factory('Users', function() {
       var Users = {};
 
-      // Users.method = function() {};
+      // Defining all to make our test pass. It doesn't need to do anything yet.
+      Users.all = function() {
+
+      };
 
       return Users;
     });
