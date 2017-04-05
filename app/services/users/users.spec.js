@@ -28,6 +28,15 @@ describe('Users factory', function() {
     twitter: 'dabill'
   }];
 
+  //The single user we expect to receive when calling findById('2')
+  var singleUser = {
+    id: '2',
+    name: 'Bob',
+    role: 'Developer',
+    location: 'New York',
+    twitter: 'billybob'
+  };
+
   //Before each test load our api.users module
   beforeEach(angular.mock.module('api.users'));
 
@@ -49,7 +58,6 @@ describe('Users factory', function() {
       expect(Users.all).toBeDefined();
     });
 
-
     // A test to verify that calling all() returns the array of users we hard-coded above
     it('should return a hard-coded list of users', function() {
       expect(Users.all()).toEqual(userList);
@@ -60,6 +68,11 @@ describe('Users factory', function() {
     // A simple test to verify the method findById exist
     it('should exist', function() {
       expect(Users.findById).toBeDefined();
+    });
+
+    // A test to verify that calling findById() with an id, in this case '2', returns a single user
+    it('should return one user object if it exists', function() {
+      expect(Users.findById('2')).toEqual(singleUser);
     });
   });
 });
