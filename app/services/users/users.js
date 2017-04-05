@@ -32,9 +32,12 @@
         twitter: 'dabill'
       }];
 
-      // Defining all to make our test pass. It doesn't need to do anything yet.
       Users.all = function() {
         return userList;
+      };
+
+      Users.findById = function(id) {
+
       };
 
       return Users;

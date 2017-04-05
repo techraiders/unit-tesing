@@ -54,6 +54,12 @@ describe('Users factory', function() {
     it('should return a hard-coded list of users', function() {
       expect(Users.all()).toEqual(userList);
     });
+  });
 
+  describe('.findById()', function() {
+    // A simple test to verify the method findById exist
+    it('should exist', function() {
+      expect(Users.findById).toBeDefined();
+    });
   });
 });
