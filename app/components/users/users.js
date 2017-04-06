@@ -10,7 +10,7 @@
       $stateProvider
         .state('users', {
           url: '/users',
-          templateUrl: 'components/users/users.html',
+          templateUrl: 'app/components/users/users.html',
           controller: 'UsersController as uc'
         });
     });
