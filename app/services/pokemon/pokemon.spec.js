@@ -18,6 +18,11 @@ describe('Pokemon factory', function() {
     }]
   };
 
+  // Add new mocked Pokéapi response
+  var RESPONSE_ERROR = {
+    'detail': 'Not found.'
+  };
+
   beforeEach(angular.mock.module('api.pokemon'));
 
   // Inject $q and $httpBackend for testing HTTP requests
@@ -64,6 +69,29 @@ describe('Pokemon factory', function() {
       expect(result.name).toEqual('pikachu');
       expect(result.sprites.front_default).toContain('.png');
       expect(result.types[0].type.name).toEqual('electric');
+    });
+
+    it('should return a 404 when called with an invalid name', function() {
+
+      // Update search term
+      var search = 'godzilla';
+
+      // Update status code and response object (reject instead of when/resolve)
+      $httpBackend.whenGET(API + search).respond(404, $q.reject(RESPONSE_ERROR));
+
+      expect(Pokemon.findByName).not.toHaveBeenCalled();
+      expect(result).toEqual({});
+
+      // Update chained method to catch
+      Pokemon.findByName(search)
+        .catch(function(res) {
+          result = res;
+        });
+
+      $httpBackend.flush();
+
+      expect(Pokemon.findByName).toHaveBeenCalledWith(search);
+      expect(result.detail).toMatch('Not found');
     });
   })
 });

@@ -12,9 +12,10 @@
         return $http.get(API + name)
           .then(function(res) {
             return res.data;
+          }).catch(function(res) {
+            return res.data;
           });
       };
-
       return Pokemon;
     });
 })();
