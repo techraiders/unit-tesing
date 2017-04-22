@@ -48,7 +48,11 @@ describe('omdb service', function() {
       }
     });
 
-    // test fails because we have not initialise the service variable i.e service.search() doesn't exist
+    // Get an instance of module's omdbApi service and assigns to local service variable.
+    angular.mock.inject(function(omdbApi) {
+      service = omdbApi;
+    });
+
     expect(service.search('star wars')).toEqual(movieData);
   });
 });
