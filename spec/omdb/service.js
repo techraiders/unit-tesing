@@ -39,16 +39,8 @@ describe('omdb service', function() {
   it('should return movie data', function() {
     var omdbApi = {};
 
-    /* Creates an angular module using anonymous function argument technique, having 'omdbApi' service */
-    angular.mock.module(function($provide) {
-      $provide.factory('omdbApi', function() {
-        return {
-          search: function(query) {
-            return movieData;
-          }
-        };
-      });
-    });
+    /* Retrieves a real standard angular module using string alias technique, having 'omdbApi' service */
+    angular.mock.module('omdb');
 
     // Get an instance of module's omdbApi service and assigns to local omdbApi variable.
     angular.mock.inject(function(_omdbApi_) {
