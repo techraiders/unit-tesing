@@ -73,31 +73,25 @@ describe('omdb service', function() {
     "Response": "True"
   };
 
-  it('should return movie data', function() {
+  beforeEach(function() {
     var omdbApi = {};
 
     /* Retrieves a real standard angular module using string alias technique, having 'omdbApi' service */
     angular.mock.module('omdb');
 
-    // Get an instance of module's omdbApi service and assigns to local omdbApi variable.
-    angular.mock.inject(function(_omdbApi_) {
-      omdbApi = _omdbApi_;
-    });
+  });
 
+  beforeEach(angular.mock.inject(function(_omdbApi_) {
+    // Get an instance of module's omdbApi service and assigns to local omdbApi variable.
+    omdbApi = _omdbApi_;
+  }));
+
+  it('should return movie data', function() {
     expect(omdbApi.search('star wars')).toEqual(movieData);
   });
 
   it('should return movie data by id', function() {
-    var omdbApi = {};
-
-    angular.mock.module('omdb');
-
-    angular.mock.inject(function(_omdbApi_) {
-      omdbApi = _omdbApi_;
-    });
-
     expect(omdbApi.find('tt0076759')).toEqual(movieDataById);
-
   });
 
 });
