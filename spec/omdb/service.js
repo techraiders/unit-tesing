@@ -37,7 +37,7 @@ describe('omdb service', function() {
   };
 
   it('should return movie data', function() {
-    var service = {};
+    var omdbApi = {};
 
     /* Creates an angular module using anonymous object literal method, having 'omdbApi' service */
     angular.mock.module({
@@ -48,11 +48,11 @@ describe('omdb service', function() {
       }
     });
 
-    // Get an instance of module's omdbApi service and assigns to local service variable.
-    angular.mock.inject(function(omdbApi) {
-      service = omdbApi;
+    // Get an instance of module's omdbApi service and assigns to local omdbApi variable.
+    angular.mock.inject(function(_omdbApi_) {
+      omdbApi = _omdbApi_;
     });
 
-    expect(service.search('star wars')).toEqual(movieData);
+    expect(omdbApi.search('star wars')).toEqual(movieData);
   });
 });
