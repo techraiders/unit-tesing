@@ -87,6 +87,7 @@ describe('omdb service', function() {
   }));
 
   it('should return movie data', function() {
+    // Expectation fails becaue search method on that factory returns promise, not only movieData we compare with
     expect(omdbApi.search('star wars')).toEqual(movieData);
   });
 
