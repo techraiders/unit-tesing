@@ -37,7 +37,11 @@ describe('omdb service', function() {
   };
 
   it('should return movie data', function() {
-    var service = {};
+    var service = {
+      search: function(query) {
+        return movieData;
+      }
+    };
     expect(service.search('star wars')).toEqual(movieData);
   });
 });
