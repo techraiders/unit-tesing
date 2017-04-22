@@ -37,11 +37,18 @@ describe('omdb service', function() {
   };
 
   it('should return movie data', function() {
-    var service = {
-      search: function(query) {
-        return movieData;
+    var service = {};
+
+    /* Creates an angular module using anonymous object literal method, having 'omdbApi' service */
+    angular.mock.module({
+      'omdbApi': {
+        search: function(query) {
+          return movieData;
+        }
       }
-    };
+    });
+
+    // test fails because we have not initialise the service variable i.e service.search() doesn't exist
     expect(service.search('star wars')).toEqual(movieData);
   });
 });
